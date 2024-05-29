@@ -17,7 +17,6 @@ const deleteItem = require("./models/deletedItem");
 const dotenv = require("dotenv");
 const nodemailer = require("nodemailer");
 const multer = require("multer");
-const ejsMate = require("ejs-mate");
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));

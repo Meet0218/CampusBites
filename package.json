@@ -27,6 +27,7 @@
     "otp-generator": "^4.0.1"
   },
   "devDependencies": {
+    "@types/node": "^20.12.12",
     "nodemon": "^2.0.22"
   }
 }
