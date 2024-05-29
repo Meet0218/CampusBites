@@ -1,7 +1,6 @@
 const mongoose = require("mongoose");
-// require("dotenv").config(); // Load environment variables from .env file
+// require("dotenv").config();
 
-// Debugging log to check if the environment variable is loaded
 // console.log("Database URL from .env file: ", process.env.DATABASE);
 
 // const db = process.env.DATABASE;
