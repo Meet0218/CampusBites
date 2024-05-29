@@ -9,10 +9,6 @@ const mongoose = require("mongoose");
 const db =
   "mongodb+srv://rajbodar720:raj123@cluster0.vysikqh.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 
-if (!db) {
-  process.exit(1); // Exit the process with an error code
-}
-
 mongoose
   .connect(db)
   .then(() => console.log("Connection to Database successfully done!"))
