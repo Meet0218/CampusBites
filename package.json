@@ -4,9 +4,9 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon",
-    "dev": "node"
+    "start": "node app.js",
+    "dev": "nodemon app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
@@ -25,5 +25,8 @@
     "multer": "^1.4.5-lts.1",
     "nodemailer": "^6.9.13",
     "otp-generator": "^4.0.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22"
   }
 }
