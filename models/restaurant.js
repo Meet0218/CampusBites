@@ -2,13 +2,6 @@
 const mongoose = require("mongoose");
 const tableSchema = require("./Table");
 const menuSchema = require("./MenuItem");
-
-
-
-
-  
-  
-  
   
 // Define the restaurant schema
 const restaurantSchema = new mongoose.Schema({

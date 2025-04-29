@@ -1,7 +1,6 @@
 const express = require("express");
 require("./db/conn");
 const app = express();
-const mongoose = require("mongoose");
 const Restaurant = require("./models/restaurant");
 const tableSchema = require("./models/Table");
 const menuSchema = require("./models/MenuItem");
@@ -62,6 +61,14 @@ const transporter = nodemailer.createTransport({
   },
 });
 
+function checkAuth(req, res, next) {
+  if (req.session.userId) {
+    next();
+  } else {
+    res.redirect("/login");
+  }
+}
+
 // Post route to handle otp verification
 // Send OTP route
 app.post("/send-otp", (req, res) => {
@@ -110,6 +117,7 @@ app.get("/login", (req, res) => {
 });
 
 app.get("/signup", (req, res) => {
+  const restId = req.session.newRestId;
   res.render("loginviews/signup");
 });
 
@@ -121,41 +129,68 @@ app.post("/signup", async (req, res) => {
     password: req.body.password,
   };
 
-  const existinguser = await LoginModel.findOne({ name: data.name });
-  if (existinguser) {
-    res.send("User already exist Please choose a different username");
+  const restId = req.session.restId;
+
+  const existingUser = await LoginModel.findOne({ email: data.email });
+  console.log("Logging existing user: " + existingUser);
+  if (existingUser) {
+    res.send("User already exists. Please choose a different username.");
   } else {
-    const saltRounds = 10; // Number of salt round for bcrypt
+    const saltRounds = 10; // Number of salt rounds for bcrypt
     const hashedPassword = await bcrypt.hash(data.password, saltRounds);
-    data.password = hashedPassword; //Repalce the hashpassword with origin
+    data.password = hashedPassword; // Replace the original password with the hashed password
 
     const userdata = await LoginModel.create(data);
     console.log(userdata);
-    res.render("restaurant/landing-page");
+
+    // Set session variables
+    req.session.userId = userdata._id;
+    req.session.email = userdata.email;
+
+    // Redirect to dashboard
+    res.redirect("/dashboard");
   }
 });
 
 //login user
 app.post("/login", async (req, res) => {
   try {
-    const check = await LoginModel.findOne({ name: req.body.username });
-    if (!check) {
-      res.send("user cannot found");
+    console.log("Request body:", req.body);
+
+    const user = await LoginModel.findOne({ email: req.body.username });
+    console.log(user);
+    if (!user) {
+      return res.send("User not found.");
     }
 
     const isPasswordMatch = await bcrypt.compare(
       req.body.password,
-      check.password
+      user.password
     );
+
     if (isPasswordMatch) {
-      res.render("restaurant/landing-page");
+      // Set session variables
+      req.session.userId = user._id;
+      req.session.email = user.email;
+
+      // Redirect to dashboard
+      res.redirect("/restaurant/create-rest");
     } else {
-      res.send("wrong password");
+      res.send("Wrong password.");
     }
   } catch (err) {
-    res.send("wrong details");
+    res.send("An error occurred. Please try again.");
     console.log(err);
   }
+});
+
+app.post("/logout", (req, res) => {
+  req.session.destroy((err) => {
+    if (err) {
+      return res.status(500).send("Failed to log out.");
+    }
+    res.status(200).send("Logged out successfully.");
+  });
 });
 
 app.get("/restaurant/create-rest", async (req, res) => {
@@ -163,24 +198,27 @@ app.get("/restaurant/create-rest", async (req, res) => {
 });
 
 app.post("/restaurant/create-rest", async (req, res) => {
-  console.log("Boo!!");
   const restName = req.body.name;
-  console.log("Rest Name:", restName);
-  lastRest = await Restaurant.find().sort({ restId: "desc" }).limit(1);
-  const newRestId = ++lastRest[0].restId;
-  restaurant = new Restaurant({
+  // console.log("Rest Name:", restName);
+  const lastRest = await Restaurant.find().sort({ restId: "desc" }).limit(1);
+  const newRestId = lastRest.length > 0 ? lastRest[0].restId + 1 : 1;
+  const restaurant = new Restaurant({
     restId: newRestId,
     name: restName,
     tables: [],
     menu: [],
   });
-  restaurant.save();
+
+  await restaurant.save();
+
+  req.session.newRestId = newRestId;
+
   res.redirect("/restaurant/" + newRestId + "/tables/add");
 });
 
 app.get("/restaurant/:restId/tables/add", async (req, res) => {
   let restId = req.params.restId;
-  console.log(restId);
+  // console.log(restId);
   res.render("restaurant/add-table.ejs", { restId });
 });
 
@@ -274,7 +312,6 @@ app.get("/restaurant/:restId/dashboard/menus", async (req, res) => {
 });
 
 app.delete("/restaurant/:restId/dashboard/menus/:menuId", async (req, res) => {
-  console.log("helo");
   try {
     const menuId = req.params.menuId;
     const restId = req.params.restId;
@@ -504,14 +541,11 @@ app.get("/foodie", async (req, res) => {
   res.send("DONE");
 });
 
-app.get("/", (req, res) => {
-  res.send("Hey There!!");
-});
-
-app.get("/restaurant/:restId/dashboard/contact-us", (req, res) => {
+app.get("/contact-us", (req, res) => {
   const restId = parseInt(req.params.restId);
   res.render("restaurant/contact-us", { restId });
 });
+
 app.get("/about-us", (req, res) => {
   const restId = parseInt(req.params.restId);
   res.render("restaurant/about-us", { restId });

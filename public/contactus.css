@@ -27,8 +27,8 @@ a {
 	padding: 12px;
 }
 
-.header-active{
-	color:#000;
+.header-active {
+	color: #000;
 }
 
 .inner-container {
@@ -38,10 +38,10 @@ a {
 	background-color: white;
 	border-radius: 12px;
 	padding: 30px;
-    position: absolute;
-    top: 8%;
-    left:23%;
-    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+	position: absolute;
+	top: 8%;
+	left: 23%;
+	box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }
 
 .tile1 {
@@ -54,7 +54,7 @@ a {
 }
 
 .tile1-heading {
-    color: #FF9A5A;
+	color: #FF9A5A;
 	font-weight: bold;
 	font-size: 1.5em;
 }
@@ -72,10 +72,6 @@ a {
 }
 
 .contact-image {
-	padding: 10px;
-	border-radius: 35px;
-	border: 1px solid #a8a4a4;
-	vertical-align: middle;
 	margin-right: 20px;
 	width: 16px;
 	height: 16px;
@@ -90,44 +86,45 @@ textarea {
 
 
 .button-62 {
-  background: linear-gradient(to bottom right, #EF4765, #FF9A5A);
-  border: 0;
-  border-radius: 4px;
-  color: #FFFFFF;
-  cursor: pointer;
-  display: inline-block;
-  font-family: -apple-system,system-ui,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-  font-size: 16px;
-  font-weight: 500;
-  line-height: 2.5;
-  outline: transparent;
-  padding: 0 1rem;
-  text-align: center;
-  text-decoration: none;
-  transition: box-shadow .2s ease-in-out;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-  white-space: nowrap;
+	background: linear-gradient(to bottom right, #EF4765, #FF9A5A);
+	border: 0;
+	border-radius: 4px;
+	color: #FFFFFF;
+	cursor: pointer;
+	display: inline-block;
+	font-family: -apple-system, system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+	font-size: 16px;
+	font-weight: 500;
+	line-height: 2.5;
+	outline: transparent;
+	padding: 0 1rem;
+	text-align: center;
+	text-decoration: none;
+	transition: box-shadow .2s ease-in-out;
+	user-select: none;
+	-webkit-user-select: none;
+	touch-action: manipulation;
+	white-space: nowrap;
 }
 
 .button-62:not([disabled]):focus {
-  box-shadow: 0 0 .25rem rgba(0, 0, 0, 0.5), -.125rem -.125rem 1rem rgba(239, 71, 101, 0.5), .125rem .125rem 1rem rgba(255, 154, 90, 0.5);
+	box-shadow: 0 0 .25rem rgba(0, 0, 0, 0.5), -.125rem -.125rem 1rem rgba(239, 71, 101, 0.5), .125rem .125rem 1rem rgba(255, 154, 90, 0.5);
 }
 
 .button-62:not([disabled]):hover {
-  box-shadow: 0 0 .25rem rgba(0, 0, 0, 0.5), -.125rem -.125rem 1rem rgba(239, 71, 101, 0.5), .125rem .125rem 1rem rgba(255, 154, 90, 0.5);
+	box-shadow: 0 0 .25rem rgba(0, 0, 0, 0.5), -.125rem -.125rem 1rem rgba(239, 71, 101, 0.5), .125rem .125rem 1rem rgba(255, 154, 90, 0.5);
 }
 
 .tile2-image img {
 	max-width: 275px;
 	max-height: 225px;
-    margin-left: 70px;
+	margin-left: 70px;
 }
 
-.img-container{
-    margin-left: 40px;
+.img-container {
+	margin-left: 40px;
 }
+
 #menu-icon {
 	display: none;
 	float: right;
@@ -139,15 +136,19 @@ textarea {
 		display: block;
 		margin: 30px auto;
 	}
+
 	.header-content {
 		width: auto;
 	}
+
 	.tile1 {
 		width: 100%;
 	}
+
 	.tile2 {
 		padding: 0px;
 	}
+
 	.tile2-image img {
 		width: 100%;
 		height: auto;
@@ -159,11 +160,12 @@ textarea {
 		float: none;
 		display: none;
 	}
+
 	#header-right-menu a {
 		display: block;
 		padding: 10px 0px;
 	}
-	
+
 	#menu-icon {
 		display: block;
 		float: right;

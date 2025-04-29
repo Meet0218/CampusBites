@@ -1,12 +1,7 @@
 const mongoose = require("mongoose");
-// require("dotenv").config();
+require("dotenv").config();
 
-// console.log("Database URL from .env file: ", process.env.DATABASE);
-
-// const db = process.env.DATABASE;
-
-const db =
-  "mongodb+srv://rajbodar720:raj123@cluster0.vysikqh.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+const db = process.env.DATABASE;
 
 mongoose
   .connect(db)
